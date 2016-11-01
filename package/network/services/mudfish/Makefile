@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mudfish
 
-PKG_VERSION:=2.3.2
+PKG_VERSION:=4.4.3
 PKG_RELEASE:=5
 
 PKG_SOURCE_URL:=http://mudfish.net/releases
@@ -21,7 +21,7 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_INSTALL:=1
 PKG_FIXUP:=autoreconf
 PKG_BUILD_PARALLEL:=1
-PKG_LICENSE:=GPL-2.0
+PKG_LICENSE:=BSD-3c
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -46,6 +46,8 @@ Package/mudfish/config=$(call Package/mudfish/config/Default)
 
 CONFIG_MUDFISH:=y
 
+CONFIGURE_PREFIX:=/opt/$(PKG_NAME)/$(PKG_VERSION)
+
 CONFIGURE_VARS += \
 	IFCONFIG=/sbin/ifconfig \
 	ROUTE=/sbin/route \
@@ -66,26 +68,20 @@ endef
 
 define Package/mudfish/install
 	$(INSTALL_DIR) \
-		$(1)/usr/sbin \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin \
 		$(1)/etc/init.d \
-		$(1)/etc/config \
-		$(1)/etc/openvpn \
-		$(1)/lib/upgrade/keep.d
+		$(1)/etc/mudfish
 
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/usr/sbin/openvpn \
-		$(1)/usr/sbin/
+		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudadm \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 
-	$(INSTALL_BIN) \
-		files/openvpn.init \
-		$(1)/etc/init.d/openvpn
-
-	$(INSTALL_CONF) files/openvpn.config \
-		$(1)/etc/config/openvpn
+	$(INSTALL_CONF) files/mudfish.config \
+		$(1)/etc/config/mudfish
 
 	$(INSTALL_DATA) \
-		files/openvpn.upgrade \
-		$(1)/lib/upgrade/keep.d/openvpn
+		files/mudfish.upgrade \
+		$(1)/lib/upgrade/keep.d/mudfish
 endef
 
 $(eval $(call BuildPackage,mudfish))
