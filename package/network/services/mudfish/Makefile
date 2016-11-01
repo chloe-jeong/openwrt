@@ -54,7 +54,9 @@ CONFIGURE_VARS += \
 
 define Build/Configure
 	$(call Build/Configure/Default, \
-		--disable-selinux \
+		--enable-developer-warnings \
+		--enable-debugging-symbols \
+		--enable-werror \
 	)
 endef
 
