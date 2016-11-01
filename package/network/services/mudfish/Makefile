@@ -32,7 +32,7 @@ define Package/mudfish/Default
   URL:=http://mudfish.net
   SUBMENU:=VPN
   MENU:=1
-  DEPENDS:=+kmod-tun
+  DEPENDS:=+kmod-tun +libopenssl +libpthread +librt
   MAINTAINER:=Weongyo Jeong <weongyo@gmail.com>
 endef
 
@@ -70,7 +70,9 @@ define Package/mudfish/install
 	$(INSTALL_DIR) \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin \
 		$(1)/etc/init.d \
-		$(1)/etc/mudfish
+		$(1)/etc/config \
+		$(1)/etc/mudfish \
+		$(1)/lib/upgrade/keep.d
 
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudadm \
@@ -84,4 +86,4 @@ define Package/mudfish/install
 		$(1)/lib/upgrade/keep.d/mudfish
 endef
 
-$(eval $(call BuildPackage,mudfish))
+$(eval $(call BuildPackage,mudfish,+libopenssl))
