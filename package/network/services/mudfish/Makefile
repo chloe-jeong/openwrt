@@ -14,9 +14,9 @@ PKG_RELEASE:=5
 
 PKG_SOURCE_URL:=http://mudfish.net/releases
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_MD5SUM:=6ca03fe0fd093e0d01601abee808835c
+PKG_MD5SUM:=6ca03fe0fd093e0d01601abee808835d
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_INSTALL:=1
 PKG_FIXUP:=autoreconf
@@ -33,7 +33,6 @@ define Package/mudfish/Default
   SUBMENU:=VPN
   MENU:=1
   DEPENDS:=+kmod-tun
-  VARIANT:=
   MAINTAINER:=Weongyo Jeong <weongyo@gmail.com>
 endef
 
@@ -55,15 +54,15 @@ CONFIGURE_VARS += \
 
 define Build/Configure
 	$(call Build/Configure/Default, \
-		$(if $(CONFIG_OPENVPN_NOSSL),--disable-ssl --disable-crypto,--enable-ssl --enable-crypto) \
+		--disable-selinux \
 	)
 endef
 
-define Package/mudfish-$(BUILD_VARIANT)/conffiles
+define Package/mudfish/conffiles
 /etc/mudfish/openvpn
 endef
 
-define Package/mudfish-$(BUILD_VARIANT)/install
+define Package/mudfish/install
 	$(INSTALL_DIR) \
 		$(1)/usr/sbin \
 		$(1)/etc/init.d \
