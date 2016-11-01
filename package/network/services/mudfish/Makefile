@@ -12,10 +12,6 @@ PKG_NAME:=mudfish
 PKG_VERSION:=4.4.3
 PKG_RELEASE:=5
 
-PKG_SOURCE_URL:=http://mudfish.net/releases
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_MD5SUM:=6ca03fe0fd093e0d01601abee808835d
-
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_INSTALL:=1
@@ -46,13 +42,15 @@ Package/mudfish/config=$(call Package/mudfish/config/Default)
 
 CONFIG_MUDFISH:=y
 
+CONFIGURE_PATH:=head/mudfish
 CONFIGURE_PREFIX:=/opt/$(PKG_NAME)/$(PKG_VERSION)
-
 CONFIGURE_VARS += \
 	IFCONFIG=/sbin/ifconfig \
 	ROUTE=/sbin/route \
 	IPROUTE=/usr/sbin/ip \
 	NETSTAT=/sbin/netstat
+
+MAKE_PATH:=head/mudfish
 
 define Build/Configure
 	$(call Build/Configure/Default, \
@@ -76,6 +74,27 @@ define Package/mudfish/install
 
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudadm \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	$(INSTALL_BIN) \
+		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/muddiag \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	$(INSTALL_BIN) \
+		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/muddnsc \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	$(INSTALL_BIN) \
+		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudfish \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	$(INSTALL_BIN) \
+		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudflow \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	$(INSTALL_BIN) \
+		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudhttpc \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	$(INSTALL_BIN) \
+		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudlog \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	$(INSTALL_BIN) \
+		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudrun \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 
 	$(INSTALL_CONF) files/mudfish.config \
