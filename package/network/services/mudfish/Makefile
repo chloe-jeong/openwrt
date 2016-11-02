@@ -67,6 +67,7 @@ endef
 define Package/mudfish/install
 	$(INSTALL_DIR) \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/var \
 		$(1)/etc/init.d \
 		$(1)/etc/config \
 		$(1)/etc/mudfish \
