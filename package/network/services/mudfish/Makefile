@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=mudfish
+PKG_NAME:=mudfish-pi
 
 PKG_VERSION:=2.1.13
 PKG_RELEASE:=5
@@ -21,8 +21,8 @@ PKG_LICENSE:=BSD-3c
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/mudfish/Default
-  TITLE:=Mudfish VPN Services
+define Package/mudfish-pi/Default
+  TITLE:=Mudfish VPN Services for embedded devices
   SECTION:=net
   CATEGORY:=Network
   URL:=http://mudfish.net
@@ -32,13 +32,13 @@ define Package/mudfish/Default
   MAINTAINER:=Weongyo Jeong <weongyo@gmail.com>
 endef
 
-Package/mudfish=$(call Package/mudfish/Default)
+Package/mudfish-pi=$(call Package/mudfish-pi/Default)
 
-define Package/mudfish/config/Default
+define Package/mudfish-pi/config/Default
 	source "$(SOURCE)/Config.in"
 endef
 
-Package/mudfish/config=$(call Package/mudfish/config/Default)
+Package/mudfish-pi/config=$(call Package/mudfish-pi/config/Default)
 
 CONFIG_MUDFISH:=y
 
@@ -60,17 +60,17 @@ define Build/Configure
 	)
 endef
 
-define Package/mudfish/conffiles
-/etc/mudfish/openvpn
+define Package/mudfish-pi/conffiles
+/etc/mudfish-pi/openvpn
 endef
 
-define Package/mudfish/install
+define Package/mudfish-pi/install
 	$(INSTALL_DIR) \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/var \
 		$(1)/etc/init.d \
 		$(1)/etc/config \
-		$(1)/etc/mudfish \
+		$(1)/etc/mudfish-pi \
 		$(1)/lib/upgrade/keep.d
 
 	$(INSTALL_BIN) \
@@ -98,12 +98,12 @@ define Package/mudfish/install
 		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudrun \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 
-	$(INSTALL_CONF) files/mudfish.config \
-		$(1)/etc/config/mudfish
+	$(INSTALL_CONF) files/mudfish-pi.config \
+		$(1)/etc/config/mudfish-pi
 
 	$(INSTALL_DATA) \
-		files/mudfish.upgrade \
-		$(1)/lib/upgrade/keep.d/mudfish
+		files/mudfish-pi.upgrade \
+		$(1)/lib/upgrade/keep.d/mudfish-pi
 endef
 
-$(eval $(call BuildPackage,mudfish,+libopenssl))
+$(eval $(call BuildPackage,mudfish-pi,+libopenssl))
