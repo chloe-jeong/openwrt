@@ -25,3 +25,10 @@ start_service() {
         config_load mudfish-pi
         config_foreach start_instance mudfish-pi
 }
+
+section_enabled() {
+	config_get_bool enable  "$1" 'enable'  0
+	config_get_bool enabled "$1" 'enabled' 0
+	[ $enable -gt 0 ] || [ $enabled -gt 0 ]
+}
+
