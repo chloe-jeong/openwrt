@@ -14,12 +14,6 @@ section_enabled() {
 
 start_instance()
 {
-	local s="$1"
-
-	section_enabled "$s" || {
-		return 1
-	}
-
         procd_open_instance
         procd_set_param respawn
         procd_set_param stderr 1
