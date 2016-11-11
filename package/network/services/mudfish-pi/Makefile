@@ -73,7 +73,6 @@ define Package/mudfish-pi/install
 		$(1)/etc/config \
 		$(1)/etc/mudfish-pi \
 		$(1)/lib/upgrade/keep.d
-
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudadm \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
@@ -98,13 +97,11 @@ define Package/mudfish-pi/install
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudrun \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
-
-	$(INSTALL_CONF) files/mudfish-pi.config \
-		$(1)/etc/config/mudfish-pi
-
-	$(INSTALL_DATA) \
-		files/mudfish-pi.upgrade \
-		$(1)/lib/upgrade/keep.d/mudfish-pi
+	$(INSTALL_BIN) files/mudfish-pi.init.d $(1)/etc/config/mudfish-pi
+	$(INSTALL_CONF) files/mudfish-pi.config $(1)/etc/config/mudfish-pi
+	$(INSTALL_DATA) files/version $(1)/etc/mudfish-pi/version
+	$(INSTALL_DATA) files/mudfish-pi.upgrade \
+	    $(1)/lib/upgrade/keep.d/mudfish-pi
 endef
 
 $(eval $(call BuildPackage,mudfish-pi,+libopenssl))
