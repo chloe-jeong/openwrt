@@ -99,6 +99,7 @@ define Package/mudfish-pi/install
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) files/mudfish-pi.init.d $(1)/etc/config/mudfish-pi
 	$(INSTALL_CONF) files/mudfish-pi.config $(1)/etc/config/mudfish-pi
+	$(INSTALL_BIN) files/dhcp.script $(1)/etc/mudfish-pi/dhcp.script
 	$(INSTALL_DATA) files/version $(1)/etc/mudfish-pi/version
 	$(INSTALL_DATA) files/mudfish-pi.upgrade \
 	    $(1)/lib/upgrade/keep.d/mudfish-pi
