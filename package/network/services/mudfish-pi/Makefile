@@ -97,7 +97,7 @@ define Package/mudfish-pi/install
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudrun \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
-	$(INSTALL_BIN) files/mudfish-pi.init.d $(1)/etc/config/mudfish-pi
+	$(INSTALL_BIN) files/mudfish-pi.init.d $(1)/etc/init.d/mudfish-pi
 	$(INSTALL_CONF) files/mudfish-pi.config $(1)/etc/config/mudfish-pi
 	$(INSTALL_BIN) files/dhcp.script $(1)/etc/mudfish-pi/dhcp.script
 	$(INSTALL_DATA) files/version $(1)/etc/mudfish-pi/version
