@@ -65,6 +65,8 @@ define Package/mudfish-pi/conffiles
 /etc/mudfish-pi/openvpn
 endef
 
+MUD_INSTALL_DIR=$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)
+
 define Package/mudfish-pi/install
 	$(INSTALL_DIR) \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin \
@@ -74,28 +76,31 @@ define Package/mudfish-pi/install
 		$(1)/etc/mudfish-pi \
 		$(1)/lib/upgrade/keep.d
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudadm \
+		$(MUD_INSTALL_DIR)/bin/mudadm \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/muddiag \
+		$(MUD_INSTALL_DIR)/bin/muddiag \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/muddnsc \
+		$(MUD_INSTALL_DIR)/bin/muddnsc \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudfish \
+		$(MUD_INSTALL_DIR)/bin/mudfish \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudflow \
+		$(MUD_INSTALL_DIR)/bin/mudflow \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudhttpc \
+		$(MUD_INSTALL_DIR)/bin/mudhttpc \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudlog \
+		$(MUD_INSTALL_DIR)/bin/mudlog \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/mudrun \
+		$(MUD_INSTALL_DIR)/bin/mudrun \
+		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	$(INSTALL_BIN) \
+		$(MUD_INSTALL_DIR)/bin/mudsupport \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) files/mudfish-pi.init.d $(1)/etc/init.d/mudfish-pi
 	$(INSTALL_CONF) files/mudfish-pi.config $(1)/etc/config/mudfish-pi
