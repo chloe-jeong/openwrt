@@ -75,6 +75,8 @@ define Package/mudfish-pi/install
 		$(1)/etc/config \
 		$(1)/etc/mudfish-pi \
 		$(1)/lib/upgrade/keep.d
+	$(RM) $(1)/opt/$(PKG_NAME)/current
+	$(LN) /opt/$(PKG_NAME)/$(PKG_VERSION) $(1)/opt/$(PKG_NAME)/current
 	$(INSTALL_BIN) \
 		$(MUD_INSTALL_DIR)/bin/mudadm \
 		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
