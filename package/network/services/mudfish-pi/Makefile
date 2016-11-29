@@ -29,7 +29,7 @@ define Package/mudfish-pi/Default
   URL:=http://mudfish.net
   SUBMENU:=VPN
   MENU:=1
-  DEPENDS:=+kmod-tun +libopenssl +libpthread +librt
+  DEPENDS:=+ip +kmod-tun +libopenssl +libpthread +librt
   MAINTAINER:=Weongyo Jeong <weongyo@gmail.com>
 endef
 
