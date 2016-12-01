@@ -69,44 +69,48 @@ MUD_INSTALL_DIR=$(PKG_INSTALL_DIR)/opt/$(PKG_NAME)/$(PKG_VERSION)
 
 define Package/mudfish-pi/install
 	$(INSTALL_DIR) \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/var \
-		$(1)/etc/init.d \
-		$(1)/etc/config \
-		$(1)/etc/mudfish-pi \
-		$(1)/lib/upgrade/keep.d
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/var \
+	    $(1)/etc/init.d \
+	    $(1)/etc/config \
+	    $(1)/etc/mudfish-pi \
+	    $(1)/lib/upgrade/keep.d
 	$(RM) $(1)/opt/$(PKG_NAME)/current
 	$(LN) /opt/$(PKG_NAME)/$(PKG_VERSION) $(1)/opt/$(PKG_NAME)/current
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/mudadm \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/mudadm \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/muddiag \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/muddiag \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/muddnsc \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/muddnsc \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/mudfish \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/mudfish \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/mudflow \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/mudflow \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/mudhttpc \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/mudhttpc \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/mudlog \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/mudlog \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/mudrun \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/mudrun \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) \
-		$(MUD_INSTALL_DIR)/bin/mudsupport \
-		$(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
+	    $(MUD_INSTALL_DIR)/bin/mudsupport \
+	    $(1)/opt/$(PKG_NAME)/$(PKG_VERSION)/bin/
 	$(INSTALL_BIN) files/mudfish-pi.init.d $(1)/etc/init.d/mudfish-pi
 	$(INSTALL_CONF) files/mudfish-pi.config $(1)/etc/config/mudfish-pi
 	$(INSTALL_BIN) files/dhcp.script $(1)/etc/mudfish-pi/dhcp.script
+	$(INSTALL_BIN) files/mudfish.fullvpn.down.sh \
+	    $(1)/etc/mudfish-pi/mudfish.fullvpn.down.sh
+	$(INSTALL_BIN) files/mudfish.fullvpn.up.sh \
+	    $(1)/etc/mudfish-pi/mudfish.fullvpn.up.sh
 	$(INSTALL_DATA) files/version $(1)/etc/mudfish-pi/version
 	$(INSTALL_DATA) files/mudfish-pi.upgrade \
 	    $(1)/lib/upgrade/keep.d/mudfish-pi
