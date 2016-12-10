@@ -1,0 +1,7 @@
+if PACKAGE_mudfish-pi
+
+config MUDFISH_ENABLE_PF
+	bool "Enable internal packet filter"
+	default y
+
+endif
